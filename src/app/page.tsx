@@ -152,6 +152,19 @@ Currently pursuing a degree in Software Engineering at Babcock University, I’v
             <h3 className="font-semibold text-lg text-white mb-2">Gresham Investment Portal</h3>
             <p className="text-gray-400">A web app to manage and track investment portfolios.</p>
           </a>
+  {/* ✅ Project 5 */}
+          <a href="https://fuelsmart.vercel.app" target="_blank" rel="noopener noreferrer"
+             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
+            <Image
+              src="/Fuelsmart.png"
+              alt="Gresham Portal"
+              width={400}
+              height={160}
+              className="rounded mb-3 w-full h-40 object-cover"
+            />
+            <h3 className="font-semibold text-lg text-white mb-2">Fuel Smart</h3>
+            <p className="text-gray-400">A web app to find nearby filling stations along with the prices and trends .</p>
+          </a>
         </div>
       </section>
 
