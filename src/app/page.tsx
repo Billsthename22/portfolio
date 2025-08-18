@@ -97,6 +97,20 @@ Currently pursuing a degree in Software Engineering at Babcock University, I’v
         <h2 className="text-3xl font-bold mb-6 text-white underline-accent">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
+ {/* ✅ Project 5 */}
+ <a href="https://fuelsmart.vercel.app" target="_blank" rel="noopener noreferrer"
+             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
+            <Image
+              src="/Fuelsmart.png"
+              alt="Gresham Portal"
+              width={400}
+              height={160}
+              className="rounded mb-3 w-full h-40 object-cover"
+            />
+            <h3 className="font-semibold text-lg text-white mb-2">Fuel Smart</h3>
+            <p className="text-gray-400">A web app to find nearby filling stations along with the prices and trends .</p>
+          </a>
+          
           {/* ✅ Project 1 */}
           <a href="https://www.redacknation.com" target="_blank" rel="noopener noreferrer"
              className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
@@ -152,19 +166,7 @@ Currently pursuing a degree in Software Engineering at Babcock University, I’v
             <h3 className="font-semibold text-lg text-white mb-2">Gresham Investment Portal</h3>
             <p className="text-gray-400">A web app to manage and track investment portfolios.</p>
           </a>
-  {/* ✅ Project 5 */}
-          <a href="https://fuelsmart.vercel.app" target="_blank" rel="noopener noreferrer"
-             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
-            <Image
-              src="/Fuelsmart.png"
-              alt="Gresham Portal"
-              width={400}
-              height={160}
-              className="rounded mb-3 w-full h-40 object-cover"
-            />
-            <h3 className="font-semibold text-lg text-white mb-2">Fuel Smart</h3>
-            <p className="text-gray-400">A web app to find nearby filling stations along with the prices and trends .</p>
-          </a>
+ 
         </div>
       </section>
 
