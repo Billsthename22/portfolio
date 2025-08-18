@@ -1,103 +1,195 @@
+"use client";
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// ✅ Keep phrases outside so they don’t trigger dependency warnings
+const phrases = ["Front-End Developer", "Creative Coder", "Web Enthusiast"];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+// ✅ TypingEffect Component
+function TypingEffect() {
+  const [text, setText] = useState("");
+  const [i, setI] = useState(0);
+  const [j, setJ] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentPhrase = phrases[i];
+
+      if (!isDeleting && j <= currentPhrase.length) {
+        setText(currentPhrase.substring(0, j));
+        setJ((prev) => prev + 1);
+      } else if (isDeleting && j >= 0) {
+        setText(currentPhrase.substring(0, j));
+        setJ((prev) => prev - 1);
+      }
+
+      if (j === currentPhrase.length && !isDeleting) {
+        setTimeout(() => setIsDeleting(true), 1000);
+      } else if (isDeleting && j === 0) {
+        setIsDeleting(false);
+        setI((prev) => (prev + 1) % phrases.length);
+      }
+    };
+
+    const speed = isDeleting ? 80 : 200;
+    const timer = setTimeout(handleTyping, speed);
+    return () => clearTimeout(timer);
+  }, [j, i, isDeleting]);
+
+  return (
+    <h2 className="text-4xl font-bold mb-4 text-white">
+      {text}
+      <span className="animate-pulse">|</span>
+    </h2>
+  );
+}
+
+// ✅ Home Page
+export default function Home() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  return (
+    <div className="bg-gray-900 text-gray-200 font-sans relative">
+      {/* Spinning Background */}
+      <div className="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-purple-800/10 via-indigo-700/10 to-gray-900/10 animate-spin-slow rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Header */}
+      <header className="bg-gray-800 shadow-md sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-white">Emioluwa Gbaja-Biamila</h1>
+          <nav>
+            <a href="#about" className="mx-2 text-gray-300 hover:text-white transition">About</a>
+            <a href="#projects" className="mx-2 text-gray-300 hover:text-white transition">Projects</a>
+            <a href="#contact" className="mx-2 text-gray-300 hover:text-white transition">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="text-center py-20 bg-gray-800 glass">
+        <TypingEffect />
+        <p className="text-lg text-gray-400">
+          Crafting sleek, responsive, and user-friendly web experiences.
+        </p>
+      </section>
+
+      {/* About */}
+      <section id="about" className="py-16 container mx-auto px-4" data-aos="fade-up">
+        <h2 className="text-3xl font-bold mb-6 text-white underline-accent">About Me</h2>
+        <p className="text-gray-400 leading-relaxed">
+        Emioluwa Gbaja-Biamila is an aspiring software engineer with a strong foundation in front-end development and a growing interest in backend technologies. My passion lies in crafting user-focused digital experiences that are both functional and visually engaging.
+
+Over time, I’ve honed my skills in HTML, CSS, Tailwind, and React while beginning to explore backend tools and frameworks that bring full-stack projects to life. I’m driven by the desire to solve real-world problems through innovative software solutions that are not only effective but also make people’s lives easier.
+
+Currently pursuing a degree in Software Engineering at Babcock University, I’ve gained practical experience through internships at Integrated Software Services Limited (ISSL) and Stanbic IBTC. These opportunities have deepened my technical knowledge and taught me the value of collaboration, adaptability, and continuous learning.
+        </p>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="py-16 bg-gray-800 container mx-auto px-4" data-aos="fade-up">
+        <h2 className="text-3xl font-bold mb-6 text-white underline-accent">Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* ✅ Project 1 */}
+          <a href="https://www.redacknation.com" target="_blank" rel="noopener noreferrer"
+             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/redacknation.png"
+              alt="Redack Nation"
+              width={400}
+              height={160}
+              className="rounded mb-3 w-full h-40 object-cover"
             />
-            Deploy now
+            <h3 className="font-semibold text-lg text-white mb-2">Redack Nation</h3>
+            <p className="text-gray-400">An ecommerce site for a fashion brand.</p>
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+
+          {/* ✅ Project 2 */}
+          <a href="https://expression3-0-2025.vercel.app" target="_blank" rel="noopener noreferrer"
+             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
+            <Image
+              src="/expression.png"
+              alt="The Expression"
+              width={400}
+              height={160}
+              className="rounded mb-3 w-full h-40 object-cover"
+            />
+            <h3 className="font-semibold text-lg text-white mb-2">The Expression</h3>
+            <p className="text-gray-400">A worship Concert Website</p>
+          </a>
+
+          {/* ✅ Project 3 */}
+          <a href="https://ai-chat-umis.onrender.com" target="_blank" rel="noopener noreferrer"
+             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
+            <Image
+              src="/chatbot.png"
+              alt="AI Chatbot"
+              width={400}
+              height={160}
+              className="rounded mb-3 w-full h-40 object-cover"
+            />
+            <h3 className="font-semibold text-lg text-white mb-2">AI Student Assistant Chatbot</h3>
+            <p className="text-gray-400">A chatbot for school help built using AI APIs.</p>
+          </a>
+
+          {/* ✅ Project 4 */}
+          <a href="https://greshams.vercel.app" target="_blank" rel="noopener noreferrer"
+             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
+            <Image
+              src="/greshamportal.png"
+              alt="Gresham Portal"
+              width={400}
+              height={160}
+              className="rounded mb-3 w-full h-40 object-cover"
+            />
+            <h3 className="font-semibold text-lg text-white mb-2">Gresham Investment Portal</h3>
+            <p className="text-gray-400">A web app to manage and track investment portfolios.</p>
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-16 container mx-auto px-4" data-aos="fade-up">
+        <h2 className="text-3xl font-bold mb-6 text-white underline-accent">Contact Me</h2>
+        <form
+          action="mailto:emioluwa@icloud.com"
+          method="POST"
+          className="glass grid grid-cols-1 gap-4 max-w-lg mx-auto p-6 rounded"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <input type="text" name="name" placeholder="Your Name"
+                 className="p-3 border border-gray-600 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
+                 required />
+          <input type="email" name="email" placeholder="Your Email"
+                 className="p-3 border border-gray-600 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
+                 required />
+          <textarea name="message" rows={5} placeholder="Your Message"
+                    className="p-3 border border-gray-600 bg-gray-800 text-white rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    required />
+          <button type="submit"
+                  className="bg-gray-700 hover:bg-gray-600 text-white py-3 px-6 rounded transition">
+            Send
+          </button>
+        </form>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-400 py-6 text-center">
+        <p>&copy; 2025 Emioluwa Gbaja-Biamila. All rights reserved.</p>
       </footer>
+
+      {/* Back to Top */}
+      <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-50"
+              title="Go to Top">
+        ↑
+      </button>
     </div>
   );
 }
