@@ -92,83 +92,97 @@ Currently pursuing a degree in Software Engineering at Babcock University, I’v
         </p>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="py-16 bg-gray-800 container mx-auto px-4" data-aos="fade-up">
-        <h2 className="text-3xl font-bold mb-6 text-white underline-accent">Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+ {/* ✅ Projects */}
+<section id="projects" className="py-16 bg-gray-800 container mx-auto px-4" data-aos="fade-up">
+  <h2 className="text-3xl font-bold mb-10 text-center text-white underline-accent">
+    Featured Projects
+  </h2>
 
- {/* ✅ Project 5 */}
- <a href="https://fuelsmart.vercel.app" target="_blank" rel="noopener noreferrer"
-             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
-            <Image
-              src="/Fuelsmart.png"
-              alt="Gresham Portal"
-              width={400}
-              height={160}
-              className="rounded mb-3 w-full h-40 object-cover"
-            />
-            <h3 className="font-semibold text-lg text-white mb-2">Fuel Smart</h3>
-            <p className="text-gray-400">A web app to find nearby filling stations along with the prices and trends .</p>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {/* Project Card */}
+    {[
+      {
+        title: "Fuel Smart",
+        img: "/Fuelsmart.png",
+        desc: "A Nigerian-based web app that helps users locate nearby filling stations and compare real-time fuel prices with Google Maps integration.",
+        tech: "Next.js, Tailwind CSS, Google Maps API",
+        live: "https://fuelsmart.vercel.app",
+        github: "#",
+      },
+      {
+        title: "Redack Nation",
+        img: "/redacknation.png",
+        desc: "An ecommerce platform for a growing fashion brand, featuring smooth checkout flows and Stripe-powered payments.",
+        tech: "Next.js, Tailwind CSS, Stripe",
+        live: "https://www.redacknation.com",
+        github: "#",
+      },
+      {
+        title: "The Expression",
+        img: "/expression.png",
+        desc: "A vibrant website for a worship concert themed 'The Expression 3.0' with schedule, gallery, and info sections.",
+        tech: "HTML, CSS, JavaScript",
+        live: "https://expression3-0-2025.vercel.app",
+        github: "#",
+      },
+      {
+        title: "AI Student Assistant Chatbot",
+        img: "/chatbot.png",
+        desc: "A conversational AI chatbot that helps students answer academic queries using OpenAI API integration.",
+        tech: "Python, Flask, OpenAI API",
+        live: "https://ai-chat-umis.onrender.com",
+        github: "#",
+      },
+      {
+        title: "Gresham Investment Portal",
+        img: "/greshamportal.png",
+        desc: "A platform for managing and tracking investment portfolios with simple dashboards and reports.",
+        tech: "HTML, CSS, JavaScript",
+        live: "https://greshams.vercel.app",
+        github: "#",
+      },
+    ].map((p, i) => (
+      <div
+        key={i}
+        className="bg-gray-700 glass p-5 rounded-lg hover:shadow-xl hover:scale-105 transition transform flex flex-col"
+        data-aos="fade-up"
+        data-aos-delay={i * 100}
+      >
+        <Image
+          src={p.img}
+          alt={p.title}
+          width={400}
+          height={160}
+          className="rounded mb-4 w-full h-40 object-cover"
+        />
+        <h3 className="font-semibold text-xl text-white mb-2">{p.title}</h3>
+        <p className="text-gray-300 text-sm mb-3 flex-grow">{p.desc}</p>
+        <p className="text-xs text-gray-400 mb-4">⚒️ Built with: {p.tech}</p>
+        <div className="flex gap-3 mt-auto">
+          <a
+            href={p.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm rounded transition"
+          >
+            Live Demo
           </a>
-          
-          {/* ✅ Project 1 */}
-          <a href="https://www.redacknation.com" target="_blank" rel="noopener noreferrer"
-             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
-            <Image
-              src="/redacknation.png"
-              alt="Redack Nation"
-              width={400}
-              height={160}
-              className="rounded mb-3 w-full h-40 object-cover"
-            />
-            <h3 className="font-semibold text-lg text-white mb-2">Redack Nation</h3>
-            <p className="text-gray-400">An ecommerce site for a fashion brand.</p>
-          </a>
-
-          {/* ✅ Project 2 */}
-          <a href="https://expression3-0-2025.vercel.app" target="_blank" rel="noopener noreferrer"
-             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
-            <Image
-              src="/expression.png"
-              alt="The Expression"
-              width={400}
-              height={160}
-              className="rounded mb-3 w-full h-40 object-cover"
-            />
-            <h3 className="font-semibold text-lg text-white mb-2">The Expression</h3>
-            <p className="text-gray-400">A worship Concert Website</p>
-          </a>
-
-          {/* ✅ Project 3 */}
-          <a href="https://ai-chat-umis.onrender.com" target="_blank" rel="noopener noreferrer"
-             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
-            <Image
-              src="/chatbot.png"
-              alt="AI Chatbot"
-              width={400}
-              height={160}
-              className="rounded mb-3 w-full h-40 object-cover"
-            />
-            <h3 className="font-semibold text-lg text-white mb-2">AI Student Assistant Chatbot</h3>
-            <p className="text-gray-400">A chatbot for school help built using AI APIs.</p>
-          </a>
-
-          {/* ✅ Project 4 */}
-          <a href="https://greshams.vercel.app" target="_blank" rel="noopener noreferrer"
-             className="bg-gray-700 glass p-4 rounded hover:shadow-lg hover:scale-105 transition transform block">
-            <Image
-              src="/greshamportal.png"
-              alt="Gresham Portal"
-              width={400}
-              height={160}
-              className="rounded mb-3 w-full h-40 object-cover"
-            />
-            <h3 className="font-semibold text-lg text-white mb-2">Gresham Investment Portal</h3>
-            <p className="text-gray-400">A web app to manage and track investment portfolios.</p>
-          </a>
- 
+          {p.github !== "#" && (
+            <a
+              href={p.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white text-sm rounded transition"
+            >
+              GitHub
+            </a>
+          )}
         </div>
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Contact */}
       <section id="contact" className="py-16 container mx-auto px-4" data-aos="fade-up">
