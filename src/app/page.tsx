@@ -4,7 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Link from "next/link";
 import { Globe, Github, Mail, ArrowUpRight, Code,  Send, Cpu, Database, Layout } from "lucide-react";
-
+import Image from "next/image";
 const phrases = ["Front-End Developer", "Creative Coder", "Web Enthusiast"];
 
 function TypingEffect() {
@@ -214,7 +214,13 @@ export default function Home() {
               <div key={i} data-aos="fade-up" data-aos-delay={i * 100} className="group relative bg-[#050505] rounded-[2.5rem] border border-white/5 overflow-hidden active:scale-[0.98] transition-all flex flex-col">
                 <div className="h-48 relative overflow-hidden">
                   <div className="absolute inset-0 bg-purple-500/10 group-hover:bg-transparent transition-colors z-10" />
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-40 group-hover:opacity-100" />
+                  <Image 
+  src={p.img} 
+  alt={p.title} 
+  fill
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-40 group-hover:opacity-100" 
+/>
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex justify-between items-start mb-6">
