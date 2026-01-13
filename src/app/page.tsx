@@ -255,9 +255,30 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-16 border-t border-white/5 text-center px-6">
         <div className="flex justify-center gap-8 mb-10 text-gray-600">
-           <Link href="#" className="hover:text-white transition"><Github size={22} /></Link>
-           <Link href="#" className="hover:text-white transition"><Globe size={22} /></Link>
-           <Link href="#" className="hover:text-white transition"><Mail size={22} /></Link>
+           {/* GitHub Link */}
+           <Link 
+             href="https://github.com/Billsthename22" 
+             target="_blank" 
+             className="hover:text-white transition-colors duration-300"
+           >
+             <Github size={22} />
+           </Link>
+
+           {/* Personal Website or LinkedIn Link */}
+           <Link 
+             href="#" 
+             className="hover:text-white transition-colors duration-300"
+           >
+             <Globe size={22} />
+           </Link>
+
+           {/* Mail Link */}
+           <Link 
+             href="mailto:emioluwagbajabiamila@gmail.com" 
+             className="hover:text-white transition-colors duration-300"
+           >
+             <Mail size={22} />
+           </Link>
         </div>
         <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-700">
           &copy; 2026 Emioluwa Gbaja-Biamila • Built with Precision
