@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Image from "next/image";
 import Link from "next/link";
-import { Globe, Github, Mail, ArrowUpRight, Code, User, Send, Cpu, Database, Layout } from "lucide-react";
+import { Globe, Github, Mail, ArrowUpRight, Code,  Send, Cpu, Database, Layout } from "lucide-react";
 
 const phrases = ["Front-End Developer", "Creative Coder", "Web Enthusiast"];
 
