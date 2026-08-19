@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import AOS from "aos";
+// AOS does not provide TypeScript declarations for its stylesheet.
+// @ts-expect-error -- side-effect CSS import supplied by the package
 import "aos/dist/aos.css";
-import Link from "next/link";
-import { Globe, Github, Mail, ArrowUpRight, Code,  Send, Cpu, Database, Layout } from "lucide-react";
+import { Globe, Github, Mail, ArrowUpRight, Code, Send, Cpu, Database, Layout, Briefcase } from "lucide-react";
 import Image from "next/image";
+
 const phrases = ["Front-End Developer", "Creative Coder", "Web Enthusiast"];
 
 function TypingEffect() {
@@ -49,8 +51,19 @@ export default function Home() {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  // ✅ Updated Project List with your specific tech stacks
   const projectList = [
+    { 
+      title: "Iwemi", 
+      img: "/iwemi.png", 
+      tech: ["Next.js", "TypeScript", "Supabase", "Tailwind"], 
+      live: "https://https://iwemiresearch.org/ebook" 
+    },
+    { 
+      title: "Impact Bakery", 
+      img: "/impactbakery.png", 
+      tech: ["React", "Next.js", "Tailwind"], 
+      live: "https://impact-bakery.com.ng" 
+    },
     { 
       title: "Future", 
       img: "/future.png", 
@@ -75,11 +88,10 @@ export default function Home() {
       tech: ["TypeScript", "Next.js", "Tailwind"], 
       live: "https://deluxeglobal.vercel.app" 
     },
-  
     { 
       title: "Redack Nation", 
       img: "/redacknation.png", 
-      tech: ["Next.js", "Stripe", "Tailwind"], 
+      tech: ["Next.js", "Paystack", "Tailwind"], 
       live: "https://www.redacknation.com" 
     },
     { 
@@ -88,6 +100,33 @@ export default function Home() {
       tech: ["Python", "OpenAI", "Flask"], 
       live: "https://ai-chat-umis.onrender.com" 
     },
+  ];
+
+  const experienceList = [
+    {
+      role: "Lead Front-End Developer (Contract)",
+      company: "Iwemi",
+      period: "Apr 2026",
+      desc: "Built front-end for the AI e-book generator using Next.js and TypeScript across 8 distinct production modules with Supabase state management."
+    },
+    {
+      role: "Full Stack Developer (Contract)",
+      company: "Redack Nation",
+      period: "Contract",
+      desc: "Designed custom e-commerce web app with Next.js, integrating Paystack gateway and WhatsApp ordering workflows."
+    },
+    {
+      role: "Front-End Developer Intern",
+      company: "Integrated Software Services Limited (ISSL)",
+      period: "6 Months",
+      desc: "Built and maintained responsive UI components with React, Next.js, and Tailwind CSS connected to SQL databases."
+    },
+    {
+      role: "Clerical Intern",
+      company: "Stanbic IBTC Bank",
+      period: "Internship",
+      desc: "Provided administrative and clerical support, document processing, and customer service tasks."
+    }
   ];
 
   return (
@@ -153,7 +192,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* About Section */}
+      {/* About Section & Experience */}
       <section id="about" className="py-24 container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div data-aos="fade-right">
@@ -161,15 +200,14 @@ export default function Home() {
               <div className="h-[1px] w-12 bg-purple-500" />
               <span className="text-xs font-black uppercase tracking-[0.4em] text-purple-500">The Engineer</span>
             </div>
-            <h2 className="text-4xl font-bold mb-8 tracking-tight">Emioluwa Gbaja-Biamila</h2>
+            <h2 className="text-4xl font-bold mb-8 tracking-tight">Emioluwa Gbajabiamila</h2>
             <div className="space-y-6 text-gray-400 leading-relaxed text-lg mb-12">
               <p>
-                Aspiring software engineer at <span className="text-white font-medium">Babcock University</span> with a foundation in 
-                frontend development and a curiosity for full-stack systems.
+                Software Engineering undergraduate at <span className="text-white font-medium">Babcock University</span> with a solid foundation in 
+                front-end development and growing expertise in backend technologies.
               </p>
               <p>
-                Having interned at <span className="text-white font-medium">Stanbic IBTC</span> and <span className="text-white font-medium">ISSL</span>, 
-                I focus on solving real-world problems with effective and aesthetically pleasing code.
+                Passionate about building user-focused digital experiences and solving real-world problems through innovative software solutions.
               </p>
             </div>
 
@@ -191,11 +229,24 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative group lg:mt-20" data-aos="fade-left">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-purple-500/20 to-transparent blur-2xl rounded-[3rem] opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="aspect-video lg:aspect-square rounded-[3rem] bg-[#0A0A0A] border border-white/10 flex items-center justify-center relative overflow-hidden">
-               <div className="text-7xl font-black text-white/5 select-none rotate-12 uppercase tracking-tighter">Stack</div>
-               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+          {/* Work Experience Timeline Card Section */}
+          <div data-aos="fade-left" className="bg-[#0A0A0A] border border-white/10 rounded-[2.5rem] p-8">
+            <div className="flex items-center gap-3 mb-8">
+              <Briefcase className="text-purple-500" size={22} />
+              <h3 className="text-xl font-bold tracking-tight uppercase italic">Work Experience</h3>
+            </div>
+            <div className="space-y-6">
+              {experienceList.map((exp, idx) => (
+                <div key={idx} className="border-l border-white/10 pl-6 relative pb-6 last:pb-0">
+                  <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-purple-500 rounded-full" />
+                  <div className="flex justify-between items-start flex-wrap gap-2 mb-1">
+                    <h4 className="font-bold text-sm text-white">{exp.role}</h4>
+                    <span className="text-[10px] font-black uppercase text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">{exp.period}</span>
+                  </div>
+                  <p className="text-xs text-gray-400 font-medium mb-2">{exp.company}</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">{exp.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -215,22 +266,21 @@ export default function Home() {
                 <div className="h-48 relative overflow-hidden">
                   <div className="absolute inset-0 bg-purple-500/10 group-hover:bg-transparent transition-colors z-10" />
                   <Image 
-  src={p.img} 
-  alt={p.title} 
-  fill
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-  className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-40 group-hover:opacity-100" 
-/>
+                    src={p.img} 
+                    alt={p.title} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-40 group-hover:opacity-100" 
+                  />
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex justify-between items-start mb-6">
                     <h3 className="font-bold text-lg tracking-tight uppercase italic">{p.title}</h3>
-                    <a href={p.live} target="_blank" className="p-2 bg-white/5 rounded-full hover:bg-white text-gray-400 hover:text-black transition-all">
+                    <a href={p.live} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-white text-gray-400 hover:text-black transition-all">
                       <ArrowUpRight size={16} />
                     </a>
                   </div>
                   
-                  {/* Programming Languages Chips */}
                   <div className="mt-auto flex flex-wrap gap-2">
                     {p.tech.map((tag, idx) => (
                       <span key={idx} className="px-3 py-1 bg-white/[0.03] border border-white/10 rounded-full text-[9px] font-black tracking-widest text-purple-500 uppercase">
@@ -260,33 +310,18 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-16 border-t border-white/5 text-center px-6">
         <div className="flex justify-center gap-8 mb-10 text-gray-600">
-           {/* GitHub Link */}
-           <Link 
-             href="https://github.com/Billsthename22" 
-             target="_blank" 
-             className="hover:text-white transition-colors duration-300"
-           >
+           <a href="https://github.com/Billsthename22" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300">
              <Github size={22} />
-           </Link>
-
-           {/* Personal Website or LinkedIn Link */}
-           <Link 
-             href="#" 
-             className="hover:text-white transition-colors duration-300"
-           >
+           </a>
+           <a href="#" className="hover:text-white transition-colors duration-300">
              <Globe size={22} />
-           </Link>
-
-           {/* Mail Link */}
-           <Link 
-             href="mailto:emioluwagbajabiamila@gmail.com" 
-             className="hover:text-white transition-colors duration-300"
-           >
+           </a>
+           <a href="mailto:emioluwagbajabiamila@gmail.com" className="hover:text-white transition-colors duration-300">
              <Mail size={22} />
-           </Link>
+           </a>
         </div>
         <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-700">
-          &copy; 2026 Emioluwa Gbaja-Biamila • Built with Precision
+          &copy; 2026 Emioluwa Gbajabiamila • Built with Precision
         </p>
       </footer>
 
