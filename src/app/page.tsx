@@ -1,9 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import AOS from "aos";
-// AOS does not provide TypeScript declarations for its stylesheet.
-// @ts-expect-error -- side-effect CSS import supplied by the package
-import "aos/dist/aos.css";
 import { Globe, Github, Mail, ArrowUpRight, Code, Send, Cpu, Database, Layout, Briefcase } from "lucide-react";
 import Image from "next/image";
 
